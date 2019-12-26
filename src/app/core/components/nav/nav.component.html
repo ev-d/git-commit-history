@@ -1,0 +1,77 @@
+<app-header (toggleSidenav)="matSideNav.toggle()"></app-header>
+
+<!-- <mat-sidenav-container class="nav-container" autosize>
+  <mat-sidenav class="nav-sidenav" mode="side" opened="toggleSideBarState">
+    
+    <mat-toolbar class="nav-toolbar">
+      <mat-toolbar-row>
+        <h2 class="nav-toolbar-title"> Project Menu </h2>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-nav-list>
+        <a 
+          mat-list-item
+          class="nav-list-item"
+          routerLink="/"
+          routerLinkActive="router-link-active"
+          (click)="toggleSideBar()">
+          <mat-icon class="nav-list-icon">home</mat-icon>
+          Home
+        </a>
+
+        <a 
+          mat-list-item
+          class="nav-list-item"
+          routerLink="/commits"
+          routerLinkActive="router-link-active"
+          (click)="toggleSideBar()">
+          <mat-icon class="nav-list-icon">code</mat-icon>
+          Commits
+        </a>
+    </mat-nav-list>
+  
+  </mat-sidenav>
+
+  <mat-sidenav-content (click)="toggleSideBar()"></mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-sidenav-container class="nav-sidenav-container" autosize="true">
+  
+  <mat-sidenav class="nav-sidenav" mode="over" #matSideNav>
+    
+    <mat-toolbar class="nav-toolbar">
+      <mat-toolbar-row>
+        <h3 class="nav-toolbar-title"> Project Menu </h3>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-nav-list>
+        <a 
+          mat-list-item
+          class="nav-list-item"
+          routerLink="/"
+          routerLinkActive="router-link-active"
+          (click)="matSideNav.close()">
+          <mat-icon class="nav-list-icon">home</mat-icon>
+          Home
+        </a>
+
+        <a 
+          mat-list-item
+          class="nav-list-item"
+          routerLink="/commits"
+          routerLinkActive="router-link-active"
+          (click)="matSideNav.close(); getDataFromGitAPI()">
+          <mat-icon class="nav-list-icon">code</mat-icon>
+          Commits
+        </a>
+    </mat-nav-list>
+  
+  </mat-sidenav>
+
+  <mat-sidenav-content class="mat-sidenav-content" (click)="matSideNav.close()">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
