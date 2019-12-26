@@ -4,6 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '', redirectTo: 'commits', pathMatch: 'prefix'
+  },
+  {
     path: 'commits', loadChildren: () => import('./feature/commits/commits.module').then(module => module.CommitsModule),
   }
 ];
