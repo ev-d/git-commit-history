@@ -1,0 +1,36 @@
+.nav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba(0 , 0, 0, .6);
+}
+
+.nav-sidenav-container {
+  height: 100%;
+}
+
+.nav-sidenav {
+  width: 270px;
+  height: 100%;
+
+  background-color: #fff;
+}
+
+.nav-toolbar {
+  background-color: #e9e8e4;
+}
+
+.nav-toolbar, .nav-list-item {
+  color: #212121;
+}
+
+.nav-list-icon {
+  padding: 0 8px;
+}
+
+.mat-sidenav-content {
+  top: 64px;
+}
