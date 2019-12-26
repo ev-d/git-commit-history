@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, reduce, scan } from 'rxjs/operators';
 
-import { HTTP_Settings } from '../../app.constants';
+import { 
+  HTTP_Settings,
+  SharedRoutesNames,
+  DEFAULT_USER_NAME,
+} from '../../app.constants';
+import { Repository } from '../models/http.models';
 
 
 @Injectable({
@@ -16,20 +21,13 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<void> {
-    return this.http.get(this.gitHost).pipe(map(data => {
-      console.log('getData from git:', data)
-    }));
+  getUserRepos(user: string = DEFAULT_USER_NAME): Observable<Array<Repository>> {
+    return this.http
+            .get<Array<Repository>>(`${this.gitHost}/${SharedRoutesNames.Users}/${user}/${SharedRoutesNames.Repos}`)
   }
 
-  getUser(): Observable<void> {
-    return this.http.get(`${this.gitHost}users/de-leviossa`).pipe(map(data => {
-      console.log('getUser from git:', data)
-    }));
-  }
-
-  getUserRepos(): Observable<void> {
-    return this.http.get(`${this.gitHost}users/de-leviossa/repos`).pipe(map(data => {
+  getUserCommits(user: string = DEFAULT_USER_NAME, repoName: string): Observable<void> {
+    return this.http.get(`${this.gitHost}/${SharedRoutesNames.Repos}/${user}/${repoName}/commits`).pipe(map(data => {
       console.log('getUserRepos from git:', data)
     }));
   }

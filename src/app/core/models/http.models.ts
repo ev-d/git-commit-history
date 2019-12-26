@@ -138,3 +138,7 @@
 // url: "https://api.github.com/repos/de-leviossa/git-commit-history"
 // watchers: 0
 // watchers_count: 0
+
+export interface Repository {
+  name: string;
+}

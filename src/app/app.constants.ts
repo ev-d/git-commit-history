@@ -7,6 +7,10 @@ export const HTTP_Settings: HTTPSettings = {
   gitHost: environment.gitAPIUrl,
 };
 
-export enum SHARED_ROUTES_NAMES {
-  PROFILE = 'profile',
+export enum SharedRoutesNames {
+  Users = 'users',
+  Repos = 'repos',
 };
+
+export const DEFAULT_USER_NAME: string = 'de-leviossa';
+export const DEFAULT_USER_REPO: string = 'git-commit-history';

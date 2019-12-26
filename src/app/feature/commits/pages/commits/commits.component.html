@@ -1,1 +1,45 @@
-<p>commits works!</p>
+<mat-vertical-stepper [linear]="true" #stepper>
+
+  <mat-step [stepControl]="userNameFormGroup">
+    <form [formGroup]="userNameFormGroup">
+      <ng-template matStepLabel>Fill out user name or use default</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="User name" formControlName="userNameCtrl" required>
+      </mat-form-field>
+      <mat-error *ngIf="userNameCtrl.hasError('not_valid')">
+        Please enter a valid user name
+      </mat-error>
+      <div>
+        <button mat-button (click)="getUserRepos()">Next</button>
+        <button mat-button (click)="setDefaulUserName()">Default User</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field>
+        <ng-template matStepLabel>Repositories</ng-template>
+        <mat-select matSelect formControlName="repoCtrl" required (selectionChange)="selectOnChangeHandler()">
+          <mat-option *ngFor="let repo of repos" [value]="repo">
+            {{ repo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="setDefaulRepo()">Default Repo</button>
+      </div>
+    </form>
+  </mat-step>
+  
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="getData()">Get Data</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

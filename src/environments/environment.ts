@@ -6,7 +6,7 @@ import { Environment } from './environment.model';
 export const environment: Environment = {
   production: false,
   backendUrl: '',
-  gitAPIUrl: 'https://api.github.com/',
+  gitAPIUrl: 'https://api.github.com',
 };
 
 /*
