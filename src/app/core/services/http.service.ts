@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { map, reduce, scan } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { 
   HTTP_Settings,
   SharedRoutesNames,
   DEFAULT_USER_NAME,
 } from '../../app.constants';
-import { Repository } from '../models/http.models';
+import { Repository, CommitExtended } from '../models/http.models';
 
 
 @Injectable({
@@ -26,9 +26,7 @@ export class HttpService {
             .get<Array<Repository>>(`${this.gitHost}/${SharedRoutesNames.Users}/${user}/${SharedRoutesNames.Repos}`)
   }
 
-  getUserCommits(user: string = DEFAULT_USER_NAME, repoName: string): Observable<void> {
-    return this.http.get(`${this.gitHost}/${SharedRoutesNames.Repos}/${user}/${repoName}/commits`).pipe(map(data => {
-      console.log('getUserRepos from git:', data)
-    }));
+  getUserCommits(user: string = DEFAULT_USER_NAME, repoName: string): Observable<CommitExtended[]> {
+    return this.http.get<CommitExtended[]>(`${this.gitHost}/${SharedRoutesNames.Repos}/${user}/${repoName}/commits`);
   }
 }

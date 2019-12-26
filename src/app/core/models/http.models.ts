@@ -142,3 +142,30 @@
 export interface Repository {
   name: string;
 }
+
+export interface CommitExtended {
+  committer: Committer;
+  commit: Commit;
+  html_url: string;
+  sha: string;
+  url: string;
+}
+
+export interface Commit {
+  author: Author;
+  committer: Committer;
+  message: string;
+  comment_count: number;
+}
+
+export interface Committer {
+  date: string;
+  email: string;
+  name: string;
+}
+
+export interface Author {
+  date: string;
+  email: string;
+  name: string;
+}

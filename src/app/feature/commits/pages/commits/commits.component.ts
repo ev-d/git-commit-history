@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 
 import { DEFAULT_USER_NAME, DEFAULT_USER_REPO } from '../../../../app.constants';
 import { HttpService } from '../../../../core/services/http.service';
+import { CommitExtended } from '../../../../core/models/http.models';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class CommitsPageComponent {
   });
 
   repos: Array<string> = [];
+  commits:  CommitExtended[] = [];
 
   get userNameCtrl(): AbstractControl {
     return this.userNameFormGroup.get('userNameCtrl');
@@ -36,10 +38,13 @@ export class CommitsPageComponent {
 
   getUserRepos(): void {
     const userName: string = this.userNameFormGroup.get('userNameCtrl').value;
-
+    
     this.httpService.getUserRepos(userName).subscribe(
       repos => {
+        this.repos = [];
+
         repos.forEach(repo => this.repos.push(repo.name));
+        
         this.stepper.next();
       },
       err => this.userNameCtrl.setErrors({'not_valid': true})
@@ -48,12 +53,12 @@ export class CommitsPageComponent {
 
   setDefaulUserName(): void {
     this.userNameFormGroup.get('userNameCtrl').setValue(DEFAULT_USER_NAME);
-    this.stepper.next();
+    this.getUserRepos();
   }
 
   setDefaulRepo(): void {
     this.secondFormGroup.get('repoCtrl').setValue(DEFAULT_USER_REPO);
-    this.getUserRepos();
+    this.stepper.next();
   }
 
   selectOnChangeHandler(): void {
@@ -64,6 +69,6 @@ export class CommitsPageComponent {
     const userName: string = this.userNameFormGroup.get('userNameCtrl').value;
     const repo: string = this.secondFormGroup.get('repoCtrl').value;
 
-    this.httpService.getUserCommits(userName, repo).subscribe(data => console.log(data));
+    this.httpService.getUserCommits(userName, repo).subscribe(commits => this.commits = commits);
   }
 }
